@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TodoTable from "../components/TodoTable";
+import { Spinner } from "reactstrap";
 
 class TodoAPI extends Component {
   constructor(props) {
@@ -24,15 +25,13 @@ class TodoAPI extends Component {
   render() {
     const { isLoaded } = this.state;
 
-    if (!isLoaded) {
-      return <h3> API Loading ..</h3>;
-    } else {
-      return (
-        <div>
-          <TodoTable items={this.state.items} />
-        </div>
-      );
-    }
+    return isLoaded ? (
+      <TodoTable items={this.state.items} />
+    ) : (
+      <div>
+        <Spinner type="grow" color="danger" />
+      </div>
+    );
   }
 }
 
